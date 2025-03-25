@@ -1,10 +1,9 @@
 /*
- * SimpleReceiver.cpp
+ * modified version of SimpleReceiver.cpp
+ * This file was part of Arduino-IRremote https://github.com/Arduino-IRremote/Arduino-IRremote.
  *
- * Demonstrates receiving ONLY NEC protocol IR codes with IRremote
- * If no protocol is defined, all protocols (except Bang&Olufsen) are active.
- *
- *  This file is part of Arduino-IRremote https://github.com/Arduino-IRremote/Arduino-IRremote.
+ * This program decodes four separate button presses from a random Sharp device
+ * and sets one of either relay 1 or 2 to on or off.
  *
  ************************************************************************************
  * MIT License
@@ -33,10 +32,9 @@
 
 #include <Arduino.h>
 
+//relay pins used
 int RY1 = 3;
 int RY2 = 4;
-
-
 
 /*
  * Specify which protocol(s) should be used for decoding.
