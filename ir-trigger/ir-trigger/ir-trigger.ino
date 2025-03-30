@@ -35,13 +35,16 @@
 //relay pins used
 int RY1 = 3;
 int RY2 = 4;
+int LED1 = 5;
+int LED2 = 6;
+bool ON1 = false;
 
 /*
  * Specify which protocol(s) should be used for decoding.
  * If no protocol is defined, all protocols (except Bang&Olufsen) are active.
  * This must be done before the #include <IRremote.hpp>
  */
-#define DECODE_DENON        // Includes Sharp
+#define DECODE_DENON  // Includes Sharp
 //#define DECODE_JVC
 //#define DECODE_KASEIKYO
 //#define DECODE_PANASONIC    // alias for DECODE_KASEIKYO
@@ -71,30 +74,33 @@ int RY2 = 4;
  * This include defines the actual pin number for pins like IR_RECEIVE_PIN, IR_SEND_PIN for many different boards and architectures
  */
 #include "PinDefinitionsAndMore.h"
-#include <IRremote.hpp> // include the library
+#include <IRremote.hpp>  // include the library
 
 void setup() {
-    Serial.begin(115200);
+  Serial.begin(115200);
 
-    pinMode (RY1, OUTPUT);
-    pinMode (RY2, OUTPUT);
-    digitalWrite(RY1_STATE,LOW);
-    digitalWrite(RY2_STATE,LOW);
+  pinMode(RY1, OUTPUT);
+  pinMode(RY2, OUTPUT);
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  digitalWrite(RY1, LOW);
+  digitalWrite(RY2, LOW);
+  digitalWrite(LED1, LOW);
+  digitalWrite(LED2, LOW);
 
+  // Just to know which program is running on my Arduino
+  Serial.println(F("START " __FILE__ " from " __DATE__ "\r\nUsing library version " VERSION_IRREMOTE));
 
-    // Just to know which program is running on my Arduino
-    Serial.println(F("START " __FILE__ " from " __DATE__ "\r\nUsing library version " VERSION_IRREMOTE));
+  // Start the receiver and if not 3. parameter specified, take LED_BUILTIN pin from the internal boards definition as default feedback LED
+  IrReceiver.begin(IR_RECEIVE_PIN, ENABLE_LED_FEEDBACK);
 
-    // Start the receiver and if not 3. parameter specified, take LED_BUILTIN pin from the internal boards definition as default feedback LED
-    IrReceiver.begin(IR_RECEIVE_PIN, ENABLE_LED_FEEDBACK);
-
-    Serial.print(F("Ready to receive IR signals of protocols: "));
-    printActiveIRProtocols(&Serial);
-    Serial.println(F("at pin " STR(IR_RECEIVE_PIN)));
+  Serial.print(F("Ready to receive IR signals of protocols: "));
+  printActiveIRProtocols(&Serial);
+  Serial.println(F("at pin " STR(IR_RECEIVE_PIN)));
 }
 
 void loop() {
-    /*
+  /*
      * Check if received data is available and if yes, try to decode it.
      * Decoded result is in the IrReceiver.decodedIRData structure.
      *
@@ -102,45 +108,56 @@ void loop() {
      * address is in command is in IrReceiver.decodedIRData.address
      * and up to 32 bit raw data in IrReceiver.decodedIRData.decodedRawData
      */
-    if (IrReceiver.decode()) {
+  if (IrReceiver.decode()) {
 
-        /*
+    /*
          * Print a summary of received data
          */
-        if (IrReceiver.decodedIRData.protocol == UNKNOWN) {
-            //Serial.println(F("Received noise or an unknown (or not yet enabled) protocol"));
-            // We have an unknown protocol here, print extended info
-            //IrReceiver.printIRResultRawFormatted(&Serial, true);
+    if (IrReceiver.decodedIRData.protocol == UNKNOWN) {
+      //Serial.println(F("Received noise or an unknown (or not yet enabled) protocol"));
+      // We have an unknown protocol here, print extended info
+      //IrReceiver.printIRResultRawFormatted(&Serial, true);
 
-            IrReceiver.resume(); // Do it here, to preserve raw data for printing with printIRResultRawFormatted()
-        } else {
-            IrReceiver.resume(); // Early enable receiving of the next IR frame
+      IrReceiver.resume();  // Do it here, to preserve raw data for printing with printIRResultRawFormatted()
+    } else {
+      IrReceiver.resume();  // Early enable receiving of the next IR frame
 
-            IrReceiver.printIRResultShort(&Serial);
-            //IrReceiver.printIRSendUsage(&Serial);
-        }
-        //Serial.println();
-
-
-
-            //Using the Sharp HT-SB602 remote commands
-            
-            if (IrReceiver.decodedIRData.command == 0xF5) {
-                Serial.println(F("Received command 0xF5 - RY1 ON"));
-                digitalWrite(RY1,HIGH);
-            } else if (IrReceiver.decodedIRData.command == 0xFE) {
-                Serial.println(F("Received command 0xFE - RY1 OFF"));
-                digitalWrite(RY1,LOW);
-            } else if (IrReceiver.decodedIRData.command == 0xFD) {
-                Serial.println(F("Received command 0xFD - RY2 ON"));
-                digitalWrite(RY2,HIGH);
-            } else if (IrReceiver.decodedIRData.command == 0xFC) {
-                Serial.println(F("Received command 0xFC - RY2 OFF"));
-                digitalWrite(RY2,LOW);
-            }
-
-
-
-
+      IrReceiver.printIRResultShort(&Serial);
+      //IrReceiver.printIRSendUsage(&Serial);
     }
+    //Serial.println();
+
+
+
+    //Using the Sharp HT-SB602 remote commands
+    // for this particular application, RY2 should never turn on unless RY1 is on
+    // RY2 should turn off after RY1 is turned off
+
+    if (IrReceiver.decodedIRData.command == 0xF5) {
+      Serial.println(F("Received command 0xF5 - RY1 ON"));
+      digitalWrite(RY1, HIGH);
+      digitalWrite(LED1, HIGH);
+      ON1 = true;
+    } else if (IrReceiver.decodedIRData.command == 0xFE) {
+      Serial.println(F("Received command 0xFE - RY1 OFF"));
+      digitalWrite(RY1, LOW);
+      digitalWrite(LED1, LOW);
+      ON1 = false;
+      delay(1000);  //actually stop for 1s
+      digitalWrite(RY2, LOW);
+      digitalWrite(LED2, LOW);
+    } else if (IrReceiver.decodedIRData.command == 0xFD) {
+      Serial.println(F("Received command 0xFD - RY2 command"));
+      if (ON1) {
+        //in this case, relay 1 is ON so we can turn on
+        Serial.println(F("RY1 currently on so - RY2 ON"));
+        digitalWrite(RY2, HIGH);
+        digitalWrite(LED2, HIGH);
+      }
+    } else if (IrReceiver.decodedIRData.command == 0xFC) {
+      Serial.println(F("Received command 0xFC - RY2 OFF"));
+      digitalWrite(RY2, LOW);
+      digitalWrite(LED2, LOW);
+    }
+  }
 }
