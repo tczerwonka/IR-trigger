@@ -131,6 +131,8 @@ void loop() {
 
     //Using the Sharp HT-SB602 remote commands
     //really weird -- on the other sofabaton this is the Kaseikyo/Sharp and the numbers don't exist -- so reprogram
+    //changed over to LG BH200
+    //0 can key up relay but stops after that, need bypassing
     // for this particular application, RY2 should never turn on unless RY1 is on
     // RY2 should turn off after RY1 is turned off
 
