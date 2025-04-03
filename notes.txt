@@ -1,0 +1,68 @@
+START /home/timc/Desktop/IR-trigger/ir-trigger/ir-trigger/ir-triSTART /home/timc/Desktop/IR-trigger/ir-trigger/ir-trigger/ir-trigger.ino from Apr  2 2025
+Using library version 4.4.1
+Ready to receive IR signals of protocols: LG, at pin 2
+Received noise or an unknown (or not yet enabled) protocol
+Received noise or an unknown (or not yet enabled) protocol
+Received noise or an unknown (or not yet enabled) protocol
+Received noise or an unknown (or not yet enabled) protocol
+Received noise or an unknown (or not yet enabled) protocol
+Received noise or an unknown (or not yet enabled) protocol
+START /home/timc/Desktop/IR-trigger/ir-trigger/ir-trigger/ir-triSTART /home/timc/Desktop/IR-trigger/ir-trigger/ir-trigger/ir-trigger.ino from Apr  2 2025
+Using library version 4.4.1
+Ready to receive IR signals of protocols: Samsung, at pin 2
+Protocol=Samsung Address=0x2C Command=0x4B Raw-Data=0xB44B2C2C 32 bits LSB first
+Protocol=SamsungLG Address=0x2C Command=0x4B Repeat gap=48500us
+Protocol=SamsungLG Address=0x2C Command=0x4B Repeat gap=93900us
+Protocol=Samsung Address=0x2C Command=0x4B Raw-Data=0xB44B2C2C 32 bits LSB first
+Protocol=SamsungLG Address=0x2C Command=0x4B Repeat gap=48450us
+Protocol=SamsungLG Address=0x2C Command=0x4B Repeat gap=93950us
+START /home/timc/Desktop/IR-trigger/ir-trigger/ir-trigger/ir-triSTART /home/timc/Desktop/IR-trigger/ir-trigger/ir-trigger/ir-trigger.ino from Apr  2 2025
+Using library version 4.4.1
+Ready to receive IR signals of protocols: Samsung, at pin 2
+Protocol=Samsung Address=0x2C Command=0x4B Raw-Data=0xB44B2C2C 32 bits LSB first
+Received command 0x4B - RY1 ON
+Protocol=SamsungLG Address=0x2C Command=0x4B Repeat gap=48400us
+Received command 0x4B - RY1 ON
+Protocol=SamsungLG Address=0x2C Command=0x4B Repeat gap=93950us
+Received command 0x4B - RY1 ON
+Protocol=Samsung Address=0x2C Command=0x41 Raw-Data=0xBE412C2C 32 bits LSB first
+Received command 0x41 - RY1 OFF
+Received noise or an unknown (or not yet enabled) protocol
+Protocol=Samsung Address=0x2C Command=0x4B Raw-Data=0xB44B2C2C 32 bits LSB first
+Received command 0x4B - RY1 ON
+Protocol=SamsungLG Address=0x2C Command=0x4B Repeat gap=48450us
+Received command 0x4B - RY1 ON
+Protocol=SamsungLG Address=0x2C Command=0x4B Repeat gap=93950us
+Received command 0x4B - RY1 ON
+Protocol=Samsung Address=0x2C Command=0x42 Raw-Data=0xBD422C2C 32 bits LSB first
+Received command 0x42 - RY2 command
+RY1 currently on so - RY2 ON
+Received noise or an unknown (or not yet enabled) protocol
+Protocol=SamsungLG Address=0x0 Command=0x0 Repeat gap=28050us
+Protocol=SamsungLG Address=0x0 Command=0x0 Repeat gap=93950us
+Protocol=Samsung Address=0x2C Command=0x43 Raw-Data=0xBC432C2C 32 bits LSB first
+Received command 0x43 - RY2 OFF
+Received noise or an unknown (or not yet enabled) protocol
+Protocol=SamsungLG Address=0x0 Command=0x0 Repeat gap=35600us
+Protocol=SamsungLG Address=0x0 Command=0x0 Repeat gap=93950us
+Protocol=Samsung Address=0x2C Command=0x43 Raw-Data=0xBC432C2C 32 bits LSB first
+Received command 0x43 - RY2 OFF
+Protocol=SamsungLG Address=0x2C Command=0x43 Repeat gap=48450us
+Received command 0x43 - RY2 OFF
+Protocol=SamsungLG Address=0x2C Command=0x43 Repeat gap=94000us
+Received command 0x43 - RY2 OFF
+Protocol=Samsung Address=0x2C Command=0x42 Raw-Data=0xBD422C2C 32 bits LSB first
+Received command 0x42 - RY2 command
+RY1 currently on so - RY2 ON
+Protocol=SamsungLG Address=0x2C Command=0x42 Repeat gap=48500us
+Received command 0x42 - RY2 command
+RY1 currently on so - RY2 ON
+Received noise or an unknown (or not yet enabled) protocol
+Protocol=SamsungLG Address=0x0 Command=0x0 Repeat gap=74950us
+Protocol=Samsung Address=0x2C Command=0x41 Raw-Data=0xBE412C2C 32 bits LSB first
+Received command 0x41 - RY1 OFF
+Received noise or an unknown (or not yet enabled) protocol
+Received noise or an unknown (or not yet enabled) protocol
+Received noise or an unknown (or not yet enabled) protocol
+Received noise or an unknown (or not yet enabled) protocol
+
