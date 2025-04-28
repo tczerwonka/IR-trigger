@@ -19,7 +19,6 @@ resistor to limit trigger output current to approximately 100mA.  The buck conve
 for this is to reduce the amount of current on the Arduino regulator.
 
 - on the Arduino Nano, 
-
--- the IR input is on pin 2
--- Relay output is pin 3 and 4, for relay 1 and 2
--- LED indicators can be placed on pins 5 and 6.
+    - the IR input is on pin 2
+    - Relay output is pin 3 and 4, for relay 1 and 2
+    - LED indicators can be placed on pins 5 and 6.
