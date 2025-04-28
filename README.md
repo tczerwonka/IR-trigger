@@ -24,3 +24,12 @@ for using the buck converter is to reduce the amount of current on the Arduino r
     - the IR input is on pin 2
     - Relay output is pin 3 and 4, for relay 1 and 2
     - LED indicators can be placed on pins 5 and 6.
+
+Operation:
+
+- The first trigger output is expected to power the primary system.  There are separate remote buttons that
+are decoded for 'on' and 'off' functions to ensure that intended state is known when a button is pushed.
+
+- The second trigger output could be an amplifier or other accessory.  Again, there are separate remote
+buttons that are decoded for 'on' and 'off'.  However this trigger will not activate unless the first
+trigger output is ON, and will automatically turn off when the first output turns OFF.  
