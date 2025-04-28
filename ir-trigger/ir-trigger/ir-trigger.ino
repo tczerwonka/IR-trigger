@@ -2,7 +2,10 @@
    modified version of SimpleReceiver.cpp
    This file was part of Arduino-IRremote https://github.com/Arduino-IRremote/Arduino-IRremote.
 
-   This program decodes four separate button presses from a random Sharp device
+   April 2025
+   Tim Czerwonka - tczerwonka at gmail dot com
+
+   This program decodes four separate button presses from a selected IR device
    and sets one of either relay 1 or 2 to on or off.
 
  ************************************************************************************
